@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>World Energy Flow</title>
+  <title>World Energy Flow 2026</title>
 
   <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
@@ -16,9 +16,12 @@
 </head>
 <body>
 
-  <!-- ── HEADER ─────────────────────────────────────────────────────────── -->
+  <!-- ── HEADER ──────────────────────────────────────────────────────────────── -->
   <header>
-    <h1>World <span>Energy</span> Flow</h1>
+    <div class="header-title">
+      <h1>World <span>Energy</span> Flow</h1>
+      <span class="header-year">2026</span>
+    </div>
     <div class="toggles">
       <label class="toggle-label oil">
         <input type="checkbox" data-layer="oil" checked/>
@@ -28,12 +31,22 @@
       <label class="toggle-label gas">
         <input type="checkbox" data-layer="gas" checked/>
         <span class="toggle-dot"></span>
-        🔥 Zemní plyn
+        🔥 Plynovody &amp; LNG
+      </label>
+      <label class="toggle-label pipeline">
+        <input type="checkbox" data-layer="pipeline" checked/>
+        <span class="toggle-dot"></span>
+        🔶 Ropovody
       </label>
       <label class="toggle-label ship">
         <input type="checkbox" data-layer="ship" checked/>
         <span class="toggle-dot"></span>
         ⛴ Tankery
+      </label>
+      <label class="toggle-label russia">
+        <input type="checkbox" data-layer="russia" checked/>
+        <span class="toggle-dot"></span>
+        🇷🇺 Ruské trasy
       </label>
       <label class="toggle-label refinery">
         <input type="checkbox" data-layer="refinery" checked/>
@@ -43,10 +56,10 @@
     </div>
   </header>
 
-  <!-- ── MAP ───────────────────────────────────────────────────────────── -->
+  <!-- ── MAP ─────────────────────────────────────────────────────────────────── -->
   <div id="map"></div>
 
-  <!-- ── BOTTOM PANEL ──────────────────────────────────────────────────── -->
+  <!-- ── BOTTOM PANEL ────────────────────────────────────────────────────────── -->
   <div class="bottom-panel">
 
     <div class="detail-panel">
@@ -55,11 +68,11 @@
     </div>
 
     <div class="chart-panel">
-      <h3>Top 5 exportérů ropy do EU</h3>
+      <h3>Dodavatelé ropy do EU — % podíl</h3>
       <div class="slider-row">
         <label>Rok:</label>
-        <input type="range" id="year-slider" min="2019" max="2023" value="2023" step="1"/>
-        <span id="year-display">2023</span>
+        <input type="range" id="year-slider" min="2022" max="2025" value="2025" step="1"/>
+        <span id="year-display">2025</span>
       </div>
       <div class="chart-wrap">
         <canvas id="eu-chart"></canvas>
@@ -68,13 +81,14 @@
 
   </div>
 
-  <!-- ── DATA FILES ─────────────────────────────────────────────────────── -->
+  <!-- ── DATA FILES ──────────────────────────────────────────────────────────── -->
   <script src="data/oil_fields.js"></script>
   <script src="data/gas_pipelines.js"></script>
+  <script src="data/oil_pipelines.js"></script>
   <script src="data/tanker_routes.js"></script>
   <script src="data/refineries.js"></script>
 
-  <!-- ── APP ───────────────────────────────────────────────────────────── -->
+  <!-- ── APP ─────────────────────────────────────────────────────────────────── -->
   <script src="app.js"></script>
 
 </body>
