@@ -6,8 +6,11 @@
   --border: #334155;
   --oil: #F59E0B;
   --gas: #10B981;
+  --pipeline: #F97316;
   --ship: #3B82F6;
+  --russia: #f43f5e;
   --refinery: #EF4444;
+  --planned: #8B5CF6;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,45 +25,60 @@ body {
   overflow: hidden;
 }
 
-/* ── HEADER ─────────────────────────────── */
+/* ── HEADER ───────────────────────────────────────────── */
 header {
   background: var(--bg2);
   border-bottom: 1px solid var(--border);
-  padding: 10px 20px;
+  padding: 8px 18px;
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
   flex-shrink: 0;
   flex-wrap: wrap;
 }
 
+.header-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+
 header h1 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.05em;
-  white-space: nowrap;
   color: var(--text);
 }
 
-header h1 span {
-  color: var(--oil);
+header h1 span { color: var(--oil); }
+
+.header-year {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.08em;
 }
 
 .toggles {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .toggle-label {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   user-select: none;
   transition: color 0.2s;
+  padding: 3px 0;
 }
 
 .toggle-label:hover { color: var(--text); }
@@ -68,30 +86,27 @@ header h1 span {
 .toggle-label input[type="checkbox"] { display: none; }
 
 .toggle-dot {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   border: 2px solid currentColor;
   transition: background 0.2s;
   flex-shrink: 0;
 }
 
-.toggle-label input:checked ~ .toggle-dot {
-  background: currentColor;
-}
+.toggle-label input:checked ~ .toggle-dot { background: currentColor; }
 
-.toggle-label.oil  { color: var(--oil); }
-.toggle-label.gas  { color: var(--gas); }
-.toggle-label.ship { color: var(--ship); }
+.toggle-label.oil      { color: var(--oil); }
+.toggle-label.gas      { color: var(--gas); }
+.toggle-label.pipeline { color: var(--pipeline); }
+.toggle-label.ship     { color: var(--ship); }
+.toggle-label.russia   { color: var(--russia); }
 .toggle-label.refinery { color: var(--refinery); }
 
-/* ── MAP ─────────────────────────────────── */
-#map {
-  height: 70vh;
-  flex-shrink: 0;
-}
+/* ── MAP ──────────────────────────────────────────────── */
+#map { height: 68vh; flex-shrink: 0; }
 
-/* ── BOTTOM PANEL ────────────────────────── */
+/* ── BOTTOM PANEL ─────────────────────────────────────── */
 .bottom-panel {
   flex: 1;
   display: flex;
@@ -103,26 +118,23 @@ header h1 span {
 .detail-panel {
   flex: 1;
   background: var(--bg2);
-  padding: 14px 18px;
+  padding: 12px 16px;
   overflow-y: auto;
   border-right: 1px solid var(--border);
 }
 
 .detail-panel h3 {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-#detail-content {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
+#detail-content { font-size: 0.88rem; color: var(--text-muted); }
 
 #detail-content .detail-title {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--text);
   margin-bottom: 8px;
@@ -131,56 +143,72 @@ header h1 span {
   gap: 8px;
 }
 
+#detail-content .detail-badge {
+  font-size: 0.68rem;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.badge-active   { background: #14532d; color: #4ade80; }
+.badge-inactive { background: #292524; color: #a8a29e; }
+.badge-partial  { background: #431407; color: #fb923c; }
+.badge-russia   { background: #4c0519; color: #fb7185; }
+.badge-planned  { background: #2e1065; color: #a78bfa; }
+
 #detail-content table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   margin-bottom: 8px;
 }
 
 #detail-content table td {
   padding: 4px 6px;
   border-bottom: 1px solid var(--border);
+  vertical-align: top;
 }
 
 #detail-content table td:first-child {
   color: var(--text-muted);
-  width: 40%;
+  width: 38%;
+  white-space: nowrap;
 }
 
 #detail-content .detail-desc {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   line-height: 1.5;
+  padding-top: 4px;
 }
 
 .chart-panel {
   width: 340px;
   flex-shrink: 0;
   background: var(--bg);
-  padding: 14px 18px;
+  padding: 12px 16px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
 .chart-panel h3 {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .slider-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .slider-row label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
   white-space: nowrap;
 }
@@ -193,33 +221,58 @@ header h1 span {
 
 #year-display {
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ship);
   min-width: 32px;
 }
 
-.chart-wrap {
-  flex: 1;
-  position: relative;
-  min-height: 0;
+.chart-wrap { flex: 1; position: relative; min-height: 0; }
+
+/* ── LEGEND STRIP ─────────────────────────────────────── */
+.map-legend {
+  position: absolute;
+  bottom: 30px;
+  left: 10px;
+  background: rgba(15,23,42,0.88);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  z-index: 1000;
+  line-height: 1.8;
+  pointer-events: none;
 }
 
-/* ── LEAFLET POPUP ───────────────────────── */
+.map-legend div { display: flex; align-items: center; gap: 6px; }
+
+.leg-line {
+  width: 22px;
+  height: 3px;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.leg-dash {
+  width: 22px;
+  height: 0;
+  border-top: 2px dashed currentColor;
+  display: inline-block;
+}
+
+/* ── LEAFLET POPUP ────────────────────────────────────── */
 .leaflet-popup-content-wrapper {
   background: var(--bg2) !important;
   border: 1px solid var(--border) !important;
   border-radius: 8px !important;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.6) !important;
   color: var(--text) !important;
+  max-width: 280px !important;
 }
 
-.leaflet-popup-tip {
-  background: var(--bg2) !important;
-}
+.leaflet-popup-tip { background: var(--bg2) !important; }
 
-.leaflet-popup-content {
-  margin: 12px 14px !important;
-}
+.leaflet-popup-content { margin: 12px 14px !important; }
 
 .popup-header {
   display: flex;
@@ -228,17 +281,21 @@ header h1 span {
   margin-bottom: 8px;
 }
 
-.popup-header strong {
-  font-size: 0.95rem;
-  color: var(--text);
-}
-
+.popup-header strong { font-size: 0.92rem; color: var(--text); }
 .popup-icon { font-size: 1.1rem; }
+
+.popup-badge {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-left: auto;
+}
 
 .popup-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   margin-bottom: 8px;
 }
 
@@ -246,24 +303,24 @@ header h1 span {
   padding: 3px 5px;
   border-bottom: 1px solid var(--border);
   color: var(--text);
+  vertical-align: top;
 }
 
-.popup-table td:first-child { color: var(--text-muted); }
+.popup-table td:first-child { color: var(--text-muted); width: 36%; }
 
 .popup-desc {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--text-muted);
   line-height: 1.45;
-  max-width: 220px;
 }
 
-/* ── SCROLLBAR ───────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
+/* ── SCROLLBAR ────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
-/* ── RESPONSIVE ──────────────────────────── */
-@media (max-width: 640px) {
+/* ── RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 680px) {
   .chart-panel { display: none; }
-  #map { height: 60vh; }
+  #map { height: 62vh; }
 }
