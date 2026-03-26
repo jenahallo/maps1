@@ -1,0 +1,269 @@
+:root {
+  --bg: #0f172a;
+  --bg2: #1e293b;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border: #334155;
+  --oil: #F59E0B;
+  --gas: #10B981;
+  --ship: #3B82F6;
+  --refinery: #EF4444;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── HEADER ─────────────────────────────── */
+header {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+header h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+header h1 span {
+  color: var(--oil);
+}
+
+.toggles {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  user-select: none;
+  transition: color 0.2s;
+}
+
+.toggle-label:hover { color: var(--text); }
+
+.toggle-label input[type="checkbox"] { display: none; }
+
+.toggle-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.toggle-label input:checked ~ .toggle-dot {
+  background: currentColor;
+}
+
+.toggle-label.oil  { color: var(--oil); }
+.toggle-label.gas  { color: var(--gas); }
+.toggle-label.ship { color: var(--ship); }
+.toggle-label.refinery { color: var(--refinery); }
+
+/* ── MAP ─────────────────────────────────── */
+#map {
+  height: 70vh;
+  flex-shrink: 0;
+}
+
+/* ── BOTTOM PANEL ────────────────────────── */
+.bottom-panel {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  min-height: 0;
+}
+
+.detail-panel {
+  flex: 1;
+  background: var(--bg2);
+  padding: 14px 18px;
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+}
+
+.detail-panel h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+#detail-content {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+#detail-content .detail-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#detail-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-bottom: 8px;
+}
+
+#detail-content table td {
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+#detail-content table td:first-child {
+  color: var(--text-muted);
+  width: 40%;
+}
+
+#detail-content .detail-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.chart-panel {
+  width: 340px;
+  flex-shrink: 0;
+  background: var(--bg);
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chart-panel h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.slider-row label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+#year-slider {
+  flex: 1;
+  accent-color: var(--ship);
+  cursor: pointer;
+}
+
+#year-display {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ship);
+  min-width: 32px;
+}
+
+.chart-wrap {
+  flex: 1;
+  position: relative;
+  min-height: 0;
+}
+
+/* ── LEAFLET POPUP ───────────────────────── */
+.leaflet-popup-content-wrapper {
+  background: var(--bg2) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+  color: var(--text) !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--bg2) !important;
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px !important;
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.popup-header strong {
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.popup-icon { font-size: 1.1rem; }
+
+.popup-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-bottom: 8px;
+}
+
+.popup-table td {
+  padding: 3px 5px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.popup-table td:first-child { color: var(--text-muted); }
+
+.popup-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  max-width: 220px;
+}
+
+/* ── SCROLLBAR ───────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── RESPONSIVE ──────────────────────────── */
+@media (max-width: 640px) {
+  .chart-panel { display: none; }
+  #map { height: 60vh; }
+}
